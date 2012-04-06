@@ -18,7 +18,7 @@
 		<p class="clan">You are with the <a href="/clan" style="background:#<?php echo $clan['color']; ?>"><?php echo $clan['name']; ?></a> clan.</p>
 		<div class="tutorial">
 			<dl class="legend cf">
-				<dt><img src="<?php echo static_url('img/ico_battle.png'); ?>" /></dt>
+				<dt><img src="<?php echo static_url('img/ico_battle.png'); ?>" alt="" /></dt>
 				<dd>Your battles</dd>
 			</dl>
 			<h2>How To Play</h2>
@@ -28,7 +28,7 @@
 
 	<ul class="leaderboard cf">
 		<?php foreach($clans as $clan): ?>
-		<li><img src="<?php echo $clan['logo']; ?>"><?php echo $clan['name']; ?></li>
+		<li><img src="<?php echo $clan['logo']; ?>" alt="" /><?php echo $clan['name']; ?></li>
 		<?php endforeach; ?>
 	</ul>
 </section>

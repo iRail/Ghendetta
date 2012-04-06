@@ -19,7 +19,7 @@
     <p>
     The Ghendetta server is moving to a safer location. A hawk spotted our headquarters and we are now forced to move deeper into unknown territory. All systems should be up within 10 minutes unless another dangerous animal crosses our journey.
     <br /><br />
-    <img src="http://ghendetta.be/img/error_404.svg" />
+    <img src="http://ghendetta.be/img/error_404.svg" alt="" />
     </p>
 </section>
 

@@ -71,25 +71,25 @@
 					<ul class="cf">
 						<li>
 							<a href="http://twitter.com/account/redirect_by_id?id=65640580">
-								<img src="https://api.twitter.com/1/users/profile_image?screen_name=hannesvdvreken&amp;size=bigger" width="73" height="73" />
+								<img src="https://api.twitter.com/1/users/profile_image?screen_name=hannesvdvreken&amp;size=bigger" width="73" height="73" alt="Hannes" />
 								Hannes <b>Developer</b>
 							</a>
 						</li>
 						<li>
 							<a href="http://twitter.com/account/redirect_by_id?id=22241784">
-								<img src="https://api.twitter.com/1/users/profile_image?screen_name=jenssegers&amp;size=bigger" width="73" height="73" />
+								<img src="https://api.twitter.com/1/users/profile_image?screen_name=jenssegers&amp;size=bigger" width="73" height="73" alt="Jens" />
 								Jens <b>Developer</b>
 							</a>
 						</li>
 						<li>
 							<a href="http://twitter.com/account/redirect_by_id?id=112554087">
-								<img src="https://api.twitter.com/1/users/profile_image?screen_name=choisissez&amp;size=bigger" width="73" height="73" />
+								<img src="https://api.twitter.com/1/users/profile_image?screen_name=choisissez&amp;size=bigger" width="73" height="73" alt="Miet" />
 								Miet <b>Designer</b>
 							</a>
 						</li>
 						<li>
 							<a href="http://twitter.com/account/redirect_by_id?id=20909514">
-								<img src="https://api.twitter.com/1/users/profile_image?screen_name=xavez&amp;size=bigger" width="73" height="73" />
+								<img src="https://api.twitter.com/1/users/profile_image?screen_name=xavez&amp;size=bigger" width="73" height="73" alt="Xavier" />
 								Xavier <b>Designer</b>
 							</a>
 						</li>
