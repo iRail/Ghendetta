@@ -49,7 +49,9 @@ class Clans extends API_Controller {
             }else{
                 $this->load->model('notification_model');
                 
+                // get shout message from post data
                 $shout = "this iz awesome 2 the max" ;
+
                 $data["userid"] = $user["fsqid"];
                 $data["name"] = $user["firstname"];
                 $data["shout"] = &$shout ;
