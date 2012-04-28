@@ -99,7 +99,30 @@ class clan_model extends CI_Model {
                 ORDER BY points DESC, last_checkin ASC " . ($fsqid ? ", CASE fsqid WHEN ? THEN 1 ELSE 0 END " : "") . ($limit ? "LIMIT 0,?" : "") . "
             ) t, (SELECT @rownum:=0) r";
         
-        return $this->db->query($query, array($clanid, $clanid, $fsqid, $limit))->result_array();
+        $result = $this->db->query($query, array($clanid, $clanid, $fsqid, $limit))->result_array();
+        
+        // moving capo to first place
+        // get clan's capo
+        $clan = $this->get($clanid);
+        
+        // get capo's position in ranked list
+        $i = 0 ;
+        while( $result[$i]["fsqid"] != $clan["capo"] ){
+            $i++;
+        }
+
+        // remember capo
+        $capo=$result[$i];
+        // move others backwards
+        for( $j = $i ; $j > 0 ; $j-- ){
+            $result[$j] = $result[$j-1];
+            $result[$j]["rank"] = $j+1;
+        }
+        // put capo in first place
+        $result[0] = $capo;
+        $result[0]["rank"] = 1 ;
+        // return manipulated list
+        return $result;
     }
     
     /**

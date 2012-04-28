@@ -36,11 +36,50 @@ class Clans extends API_Controller {
             $this->output($clans);
         }
     }
+
+    function shout(){
+        
+        if ($user = $this->auth->current_user()) {
+            $fsqid = $user['fsqid'];
+            
+            $this->load->model('clan_model');
+            $clan = $this->clan_model->get($user['clanid']) ;
+            if( $fsqid != $clan['capo'] ){
+                $this->error('You are not the capo of your clan',401);
+            }else{
+                $this->load->model('notification_model');
+                
+                $shout = "this iz awesome 2 the max" ;
+                $data["userid"] = $user["fsqid"];
+                $data["name"] = $user["firstname"];
+                $data["shout"] = &$shout ;
+                
+                $notification["to_type"] = "clan";
+                $notification["to"] = $user['clanid'];
+                $notification["type"] = "message" ;
+                $notification["data"] = $data ;
+                
+                $notification["notificationid"] = $this->notification_model->insert( $notification );
+                
+                $data = NULL ;
+                $data["error"] = 0;
+                //suggestive
+                //$data["error_msg"] = "you can only do one shout every 5 minutes" ;
+                $data["notification"] = $notification ;
+                $this->output( $data );
+            }
+        } else {
+            $this->error('Not authenticated', 401);
+        }
+    }
     
     function _remap($method) {
         switch ($method) {
             case 'index' :
                 $this->get();
+                break;
+            case 'shout' :
+                $this->shout();
                 break;
             default :
                 $this->get($method);
