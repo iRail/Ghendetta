@@ -46,17 +46,22 @@ class Clans extends API_Controller {
             $clan = $this->clan_model->get($user['clanid']) ;
             if( $fsqid != $clan['capo'] ){
                 // no homo. Errr... Capo
-                $this->error('You are not the capo of your clan',401);
+                $data['error'] = 1 ;
+                $data['error_msg'] = "You are not the capo of your clan, you are not allowed to make clan shouts";
             }else if( !$this->input->post('shout') ){
                 // no shout is posted
-                
+                $data['error'] = 2 ;
+                $data['error_msg'] = "Please send a shout via post request";
             }else{
                 if( $this->input->post('shout') == '' ){
                     // shout is empty
-                    $data['error'] = 1 ;
-                    $data['error_msg'] = "shout cannot be empty, stupid";
+                    $data['error'] = 3 ;
+                    $data['error_msg'] = "shout cannot be empty, stupid!";
+                }if( strlen($this->input->post('shout')) > 140 ){
+                    // shout's too long
+                    $data['error'] = 4 ;
+                    $data['error_msg'] = "shout cannot be longer then 140 characters.";
                 }else{
-                    // shout is posted
                     // gather data
                     $data["userid"] = $user["fsqid"];
                     $data["name"] = $user["firstname"];
@@ -79,8 +84,8 @@ class Clans extends API_Controller {
                     //$data["error_msg"] = "you can only do one shout every 5 minutes" ;
                     $data["notification"] = $notification ;
                 }
-                $this->output( $data );
             }
+            $this->output( $data );
         } else {
             $this->error('Not authenticated', 401);
         }

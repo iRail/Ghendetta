@@ -47,6 +47,9 @@
 					case 'rank_won':
 				        echo 'Your fellow associate <strong>' . $notification['data']['name'] . '</strong> was just promoted. <span class="date">' . date('j M H:i', $notification['date']) . '</span>';
 				        break;
+                    case 'message':
+				        echo 'Your capo <strong><a href="https://foursquare.com/user/'.$notification['data']['userid'].'">' . $notification['data']['name'] . '</a></strong> says:<br /><strong>&quot;'. $notification['data']['shout'] .'&quot;</strong><span class="date"><br />' . date('j M H:i', $notification['date']) . '</span></span>';
+				        break;
 				}
 				?>
 			</p>
