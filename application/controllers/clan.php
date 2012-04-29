@@ -35,5 +35,9 @@ class Clan extends MY_Controller {
             redirect();
         }
     }
+    
+    function shout() {
+        
+    }
 
 }
