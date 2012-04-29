@@ -14,17 +14,10 @@ require_once (APPPATH . 'core/API_Controller.php');
 class Specials extends API_Controller {
     
     function index() {
-        // try from cache
-        if (!$specials = $this->cache->get("api/specials.cache")) {
-            // cache miss
-            $this->load->model('special_model');
-            $specials = $this->special_model->get_all_active();
-            
-            // save cache
-            $this->cache->save("api/specials.cache", $specials, 300);
-        }
+        $this->load->model('special_model');
+        $specials = $this->special_model->get_all_active();
         
-        $this->output($specials);
+        return $specials;
     }
 
 }

@@ -37,7 +37,35 @@ class Clan extends MY_Controller {
     }
     
     function shout() {
+        // no no no no
+        if (!$user = $this->auth->current_user()) {
+            redirect();
+        }
         
+        $this->load->model('clan_model');
+        $clan = $this->clan_model->get($user['clanid']);
+        
+        if ($clan['capo'] != $user['fsqid']) {
+            // you are not the capo of your clan, you are not allowed to make clan shouts
+            redirect('clan');
+        }
+        
+        if (!$this->input->post('shout')) {
+            // no shout detected
+            redirect('clan');
+        }
+        
+        $this->load->model('notification_model');
+        
+        $notification = array();
+        $notification['to_type'] = 'clan';
+        $notification['to'] = $user['clanid'];
+        $notification['type'] = 'message';
+        $notification['data'] = array('userid' => $user['fsqid'], 'name' => $user['firstname'], 'message' => $this->input->post('message'));
+        
+        $this->notification_model->insert($notification);
+        
+        redirect('clan');
     }
 
 }

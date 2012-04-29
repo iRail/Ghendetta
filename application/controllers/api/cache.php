@@ -14,7 +14,7 @@ require_once (APPPATH . 'core/API_Controller.php');
 class Cache extends API_Controller {
     
     function index() {
-        $this->output($this->cache->cache_info());
+        return $this->cache->cache_info();
     }
 
 }

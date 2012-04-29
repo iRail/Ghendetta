@@ -31,6 +31,14 @@ class Foursquare extends CI_Controller {
             $this->output->enable_profiler(TRUE);
         }
         
+        $this->users();
+        
+        if (!$this->input->is_cli_request()) {
+            $this->output->set_profiler_sections(array('queries' => TRUE));
+        }
+    }
+    
+    function users() {
         echo "Cronjob started at " . date('d/m/Y H:i') . "\n";
         
         $limit = $this->input->get('limit') ? $this->input->get('limit') : FALSE;
@@ -89,10 +97,6 @@ class Foursquare extends CI_Controller {
         
         echo "Cronjob inserted $count checkins for " . count($users) . " users at " . date('d/m/Y H:i') . "\n";
         echo "---------------------------------------------------------------\n";
-        
-        if (!$this->input->is_cli_request()) {
-            $this->output->set_profiler_sections(array('queries' => TRUE));
-        }
     }
     
     /**

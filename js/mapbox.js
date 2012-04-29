@@ -190,7 +190,7 @@ var Mapbox = function() {
 			});
 
 			// get user checkins
-			$.getJSON(site_url + 'api/user/battles.json', {}, function(data) {
+			$.getJSON(site_url + 'api/users/' + user + '/battles.json', {}, function(data) {
 				if (data) {
 					addBattles(data);
 				}

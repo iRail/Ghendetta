@@ -1,7 +1,17 @@
+<?php 
+    // get current user
+    $ci = &get_instance();
+    $user = $ci->auth->current_user();
+?>
+
 <script>
 	var base_url = '<?php echo base_url(); ?>';
 	var site_url = '<?php echo rtrim(site_url(), '/') . '/'; ?>';
 	var static_url = '<?php echo static_url(); ?>';
+
+<?php if($user): ?>
+	var user = '<?php echo $user['fsqid']; ?>';
+<?php endif; ?>
 </script>
 
 <script src="<?php echo static_url('js/jquery.js'); ?>"></script>

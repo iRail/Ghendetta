@@ -48,7 +48,7 @@
 				        echo 'Your fellow associate <strong>' . $notification['data']['name'] . '</strong> was just promoted. <span class="date">' . date('j M H:i', $notification['date']) . '</span>';
 				        break;
                     case 'message':
-				        echo 'Your capo <strong><a href="https://foursquare.com/user/'.$notification['data']['userid'].'">' . $notification['data']['name'] . '</a></strong> says:<br /><strong>&quot;'. $notification['data']['shout'] .'&quot;</strong><span class="date"><br />' . date('j M H:i', $notification['date']) . '</span></span>';
+				        echo 'Your capo <strong>' . $notification['data']['name'] . '</strong> says:<br /><strong>&quot;'. $notification['data']['message'] .'&quot;</strong><span class="date"><br />' . date('j M H:i', $notification['date']) . '</span></span>';
 				        break;
 				}
 				?>
@@ -83,7 +83,7 @@
 
 <?php include_once('footer.tpl'); ?>
 
-<script src="<?php echo static_url('js/mapbox.min.js?v=200401'); ?>"></script>
+<script src="<?php echo static_url('js/mapbox.min.js?v=300401'); ?>"></script>
 
 </body>
 </html>

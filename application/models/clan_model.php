@@ -61,7 +61,7 @@ class clan_model extends CI_Model {
      */
     function get_all_stats() {
         $query = "
-            SELECT clans.*, sum(points) as points, sum(battles) as battles, count(users.active) as members
+            SELECT clans.*, COALESCE(SUM(points), 0) as points, COALESCE(SUM(battles), 0) as battles, COALESCE(COUNT(users.active), 0) as members
 			FROM clans
 			LEFT JOIN users ON clans.clanid = users.clanid
 			LEFT JOIN (
@@ -153,7 +153,7 @@ class clan_model extends CI_Model {
      */
     function suggest_clan() {
         $query = "
-            SELECT clans.*, sum(points) as points, sum(battles) as battles
+            SELECT clans.*, SUM(points) as points, SUM(battles) as battles
 			FROM clans
 			LEFT JOIN users ON clans.clanid = users.clanid AND users.active = 1
 			LEFT JOIN (
