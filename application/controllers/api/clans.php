@@ -38,36 +38,47 @@ class Clans extends API_Controller {
     }
 
     function shout(){
-        
         if ($user = $this->auth->current_user()) {
+            // one must be logged in, at least.
             $fsqid = $user['fsqid'];
             
             $this->load->model('clan_model');
             $clan = $this->clan_model->get($user['clanid']) ;
             if( $fsqid != $clan['capo'] ){
+                // no homo. Errr... Capo
                 $this->error('You are not the capo of your clan',401);
+            }else if( !$this->input->post('shout') ){
+                // no shout is posted
+                
             }else{
-                $this->load->model('notification_model');
-                
-                // get shout message from post data
-                $shout = "this iz awesome 2 the max" ;
+                if( $this->input->post('shout') == '' ){
+                    // shout is empty
+                    $data['error'] = 1 ;
+                    $data['error_msg'] = "shout cannot be empty, stupid";
+                }else{
+                    // shout is posted
+                    // gather data
+                    $data["userid"] = $user["fsqid"];
+                    $data["name"] = $user["firstname"];
+                    $data["shout"] = $this->input->post('shout');
+                    
+                    // build notification
+                    $notification["to_type"] = "clan";
+                    $notification["to"] = $user['clanid'];
+                    $notification["type"] = "message" ;
+                    $notification["data"] = $data ;
 
-                $data["userid"] = $user["fsqid"];
-                $data["name"] = $user["firstname"];
-                $data["shout"] = &$shout ;
-                
-                $notification["to_type"] = "clan";
-                $notification["to"] = $user['clanid'];
-                $notification["type"] = "message" ;
-                $notification["data"] = $data ;
-                
-                $notification["notificationid"] = $this->notification_model->insert( $notification );
-                
-                $data = NULL ;
-                $data["error"] = 0;
-                //suggestive
-                //$data["error_msg"] = "you can only do one shout every 5 minutes" ;
-                $data["notification"] = $notification ;
+                    // store notification
+                    $this->load->model('notification_model');
+                    $notification["notificationid"] = $this->notification_model->insert( $notification );
+                    
+                    // return no errors & notification
+                    $data = NULL ;
+                    $data["error"] = 0;
+                    // suggestive:
+                    //$data["error_msg"] = "you can only do one shout every 5 minutes" ;
+                    $data["notification"] = $notification ;
+                }
                 $this->output( $data );
             }
         } else {
