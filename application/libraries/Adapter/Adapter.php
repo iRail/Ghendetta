@@ -15,7 +15,7 @@ class Adapter extends CI_Driver_Library {
     protected $adapter = 'foursquare';
     
     public function __construct($config = array()) {
-        if (isset($config['adapter']) && in_array($config['adapter'], array_map('strtolower', $this->valid_drivers))) {
+        if (isset($config['adapter']) && in_array('adapter_'.$config['adapter'], array_map('strtolower', $this->valid_drivers))) {
             $this->adapter = $config['adapter'];
         }
     }
