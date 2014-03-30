@@ -49,7 +49,7 @@ class Foursquare_API {
             $callback = $this->settings['callback_url'];
         }
         
-        return 'https://foursquare.com/oauth2/authenticate?client_id=' . $this->settings['client_id'] . '&response_type=code&redirect_uri=' . urlencode($callback);
+        return 'https://foursquare.com/oauth2/authenticate?v=20120224&client_id=' . $this->settings['client_id'] . '&response_type=code&redirect_uri=' . urlencode($callback);
     }
     
     /**
@@ -58,7 +58,7 @@ class Foursquare_API {
      * @return string
      */
     function request_token($code) {
-        $url = 'https://foursquare.com/oauth2/access_token?client_id=' . $this->settings['client_id'] . '&client_secret=' . $this->settings['client_secret'] . '&grant_type=authorization_code&redirect_uri=' . urlencode($this->settings['callback_url']) . '&code=' . $code;
+        $url = 'https://foursquare.com/oauth2/access_token?v=20120224&client_id=' . $this->settings['client_id'] . '&client_secret=' . $this->settings['client_secret'] . '&grant_type=authorization_code&redirect_uri=' . urlencode($this->settings['callback_url']) . '&code=' . $code;
         $json = $this->_get($url);
         
         if (!isset($json->access_token)) {
@@ -90,9 +90,9 @@ class Foursquare_API {
         }
         
         if (strtoupper($method) == 'POST') {
-            $json = $this->_post('https://api.foursquare.com/v2/' . $uri . '?' . http_build_query($params), $data);
+            $json = $this->_post('https://api.foursquare.com/v2/' . $uri . '?v=20120224&' . http_build_query($params), $data);
         } else {
-            $json = $this->_get('https://api.foursquare.com/v2/' . $uri . '?' . http_build_query(array_merge($params, $data)));
+            $json = $this->_get('https://api.foursquare.com/v2/' . $uri . '?v=20120224&' . http_build_query(array_merge($params, $data)));
         }
         
         if (!$json) {
