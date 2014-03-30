@@ -1,7 +1,7 @@
 var Mapbox = function() {
 
 	var map;
-	var url = 'http://api.tiles.mapbox.com/v3/mapbox.mapbox-streets.jsonp';
+	var url = 'http://api.tiles.mapbox.com/v3/ghendetta.map-15nqlevx.jsonp';
 
 	// map layers
 	var layers = {};
